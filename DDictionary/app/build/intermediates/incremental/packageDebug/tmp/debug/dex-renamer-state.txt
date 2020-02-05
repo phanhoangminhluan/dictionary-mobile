@@ -1,0 +1,4 @@
+#Wed Feb 05 17:38:55 ICT 2020
+base.0=/Users/hoaithuong/Documents/Kỳ 7/DDictionary/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
