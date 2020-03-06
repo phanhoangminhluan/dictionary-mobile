@@ -31,7 +31,7 @@ import retrofit2.Retrofit;
 
 public class HomeFragment extends Fragment {
     private IHintService iHintService = null;
-    private ImageView searchView;
+    private ImageView btnSearch;
     private EditText searchText;
     private Retrofit retrofit;
     private RecyclerView textList;
@@ -41,13 +41,13 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        searchView = view.findViewById(R.id.searchView);
+        btnSearch = view.findViewById(R.id.searchView);
         searchText = view.findViewById(R.id.txtTextSearch);
         textList = view.findViewById(R.id.textList);
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
 
-        searchView.setOnClickListener(new View.OnClickListener() {
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String textSearch = searchText.getText().toString();
@@ -68,7 +68,6 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(Call<TextModel> call, Response<TextModel> response) {
                         int code = response.code();
-                        System.out.println(response.code());
                         if (code == 200) {
                             final ArrayList<String> texts = response.body().getBody();
                             TextAdapter textAdapter = new TextAdapter(texts);
@@ -82,14 +81,12 @@ public class HomeFragment extends Fragment {
                                     Intent intent = new Intent(getContext(), DetailActivity.class);
                                     intent.putExtra("hi", text);
                                     startActivity(intent);
-                                    System.out.println(texts);
 
                                 }
                             });
                         }else{
                             ErrorDialog errorDialog = new ErrorDialog(textSearch);
                             errorDialog.show(getFragmentManager(), "Example");
-                            System.out.println(errorDialog);
                         }
 
 

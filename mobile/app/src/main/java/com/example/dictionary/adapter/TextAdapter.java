@@ -59,8 +59,6 @@ public class TextAdapter extends RecyclerView.Adapter<TextAdapter.TextHolder> {
                 }
             });
         }
-
-
     }
     public interface OnItemClickListener{
         public void onItemClick(String text);

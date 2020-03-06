@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateFlashCardActivity"></activity>
+        <activity android:name=".LearnTermActivity"></activity>
+        <activity android:name=".FlashcardDetailActivity" />
+        <activity android:name=".CreateFlashCardActivity" />
         <activity android:name=".CreateWordActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".HomeActivity" />

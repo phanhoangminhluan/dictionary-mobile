@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#EEEEEE"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".CreateFlashCardActivity">
 
     <ScrollView
@@ -22,10 +23,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Create a new study set"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Subject, chapter, unit" />
+                    android:hint="Subject, chapter, unit"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -38,7 +47,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="What's your set about?" />
+                    android:hint="What's your set about?"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -54,34 +64,49 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="#FFFF"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <TextView
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="TERM"
+                        android:textColor="#666666"
+                        android:textSize="10dp" />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="DEFINITION"
+                        android:textColor="#666666"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="TERM"
-                    android:textColor="#666666"
+                    android:layout_gravity="center"
+                    android:minHeight="40dp"
+                    android:src="@drawable/ic_delete" />
 
-                    android:textSize="10dp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="DEFINITION"
-
-                    android:textColor="#666666"
-                    android:textSize="10dp" />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,7 +125,6 @@
                     android:layout_marginBottom="10dp"
                     android:text="TERM"
                     android:textColor="#666666"
-
                     android:textSize="10dp" />
 
                 <EditText
@@ -112,41 +136,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:text="DEFINITION"
-
-                    android:textColor="#666666"
-                    android:textSize="10dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="#FFFF"
-                android:orientation="vertical">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="TERM"
-                    android:textColor="#666666"
-
-                    android:textSize="10dp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="DEFINITION"
-
                     android:textColor="#666666"
                     android:textSize="10dp" />
             </LinearLayout>
@@ -155,8 +144,17 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="+ ADD CARD" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="#008080"
                 android:onClick="backToFlashcardHome"
-                android:text="Done" />
+                android:text="Done"
+                android:textColor="#ffff" />
         </LinearLayout>
 
     </ScrollView>
