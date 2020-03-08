@@ -3,6 +3,7 @@ package com.example.dictionary.service;
 import com.example.dictionary.model.BodyCardDetailModel;
 import com.example.dictionary.model.BodyCardModel;
 import com.example.dictionary.model.BodyCardSetDetailModel;
+import com.example.dictionary.model.BodyCreateCard;
 import com.example.dictionary.model.Card;
 import com.example.dictionary.model.CreateCardSetModel;
 import com.example.dictionary.model.DetailModel;
@@ -33,8 +34,9 @@ public interface IHintService {
     Call<BodyCardSetDetailModel> getAllFlashcardDetail(@Header("Authorization") String token, @Path("id") String id);//
 
 
+//Todo: @Body: đẩy lên, BodyCreateCard: nhận về
     @POST("dictionary-flashcard/card-set/custom")
-    Call<CreateCardSetModel> createCardSet(@Header("Authorization") String token, @Body CreateCardSetModel createCardSetModel);
+    Call<BodyCreateCard> createCardSet(@Header("Authorization") String token, @Body CreateCardSetModel createCardSetModel);
 
 
     @GET("dictionary-flashcard/card")

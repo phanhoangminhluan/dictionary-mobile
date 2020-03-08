@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.dictionary.adapter.CardAdapter;
 import com.example.dictionary.adapter.TermFlashcardAdapter;
@@ -30,6 +31,9 @@ public class FlashcardDetailActivity extends AppCompatActivity {
     private IHintService iHintService = null;
     private Retrofit retrofit;
     private RecyclerView listTerm_Definition;
+    private TextView txtName;
+    private TextView txtUsername;
+    private  TextView txtCardCount;
     public static String KEY_FLASHCARD_ID = "KEY_FLASHCARD_ID";
     public static String KEY_FLASHCARD_TERM = "KEY_FLASHCARD_TERM";
     public static String KEY_FLASHCARD_DEFINITION = "KEY_FLASHCARD_DEFINITION";
@@ -54,11 +58,17 @@ public class FlashcardDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BodyCardSetDetailModel> call, final Response<BodyCardSetDetailModel> response) {
                 listTerm_Definition = findViewById(R.id.listTermAndDefinition);
+                txtName = findViewById(R.id.txtName);
+                txtUsername = findViewById(R.id.txtUsername);
+                txtCardCount = findViewById(R.id.txtCardsCount);
                 if(response.code() == 200){
                     if (response.body().getBody() != null) {
                         ArrayList<Card> term_definition = response.body().getBody().getCards();
                         if(term_definition != null){
                             CardAdapter cardAdapter = new CardAdapter(term_definition);
+                            txtUsername.setText(response.body().getBody().getUsername());
+                            txtCardCount.setText(response.body().getBody().getCards().size()+" terms");
+                            txtName.setText(response.body().getBody().getName());
                             //Todo: truyền hàm setOnclickListener vô Adapter
                             cardAdapter.setOnItemClickListener(new CardAdapter.OnItemClickistener() {
                                 @Override

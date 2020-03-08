@@ -75,6 +75,5 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
     public interface OnItemClickListener{
         public void onItemClick(String id);
 
-
     }
 }
