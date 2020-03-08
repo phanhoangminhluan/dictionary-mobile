@@ -4,6 +4,7 @@
     android:layout_margin="16dp"
     android:background="#ffffff"
     android:id="@+id/termCard"
+
     android:layout_height="150dp">
     <TextView
         android:id="@+id/txtTermCard"

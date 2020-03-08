@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,7 @@ import com.example.dictionary.model.Card;
 
 import java.util.ArrayList;
 
-public class TermFlashcardAdapter  extends RecyclerView.Adapter<TermFlashcardAdapter.TermHolder>  {
+public class TermFlashcardAdapter extends RecyclerView.Adapter<TermFlashcardAdapter.TermHolder> {
     private ArrayList<Card> texts;
     private TermFlashcardAdapter.OnItemClickListener onItemClickListener;
 
@@ -48,26 +49,41 @@ public class TermFlashcardAdapter  extends RecyclerView.Adapter<TermFlashcardAda
     class TermHolder extends RecyclerView.ViewHolder {
         TextView txtTermCard;
         ImageView btnZoom;
+        LinearLayout linearLayout;
 
-//TOdo: b1
+        //TOdo: b1: Swap Term and Definition
         public TermHolder(@NonNull View itemView) {
             super(itemView);
             txtTermCard = itemView.findViewById(R.id.txtTermCard);
-            btnZoom = itemView.findViewById(R.id.btnZoom);
-                btnZoom.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int position = getAdapterPosition();
-                        if(onItemClickListener != null && position != RecyclerView.NO_POSITION){
-                            onItemClickListener.onItemClick(txtTermCard.getText().toString());
-                        }
+            linearLayout = itemView.findViewById(R.id.termCard);
+            linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    String value = txtTermCard.getText().toString();
+                    if (value.equals(texts.get(position).getTerm())) {
+                        txtTermCard.setText(texts.get(position).getDefinition());
+                    } else {
+                        txtTermCard.setText(texts.get(position).getTerm());
                     }
-                });
+                }
+            });
+            //
+            btnZoom = itemView.findViewById(R.id.btnZoom);
+            btnZoom.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (onItemClickListener != null && position != RecyclerView.NO_POSITION) {
+                        onItemClickListener.onItemClick(txtTermCard.getText().toString());
+                    }
+                }
+            });
 
         }
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         public void onItemClick(String text);
 
 

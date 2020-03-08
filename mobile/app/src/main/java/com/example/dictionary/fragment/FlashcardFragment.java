@@ -1,11 +1,14 @@
 package com.example.dictionary.fragment;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,10 +35,15 @@ import retrofit2.Retrofit;
 
 public class FlashcardFragment extends Fragment {
     private IHintService iHintService = null;
-    private String token="Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZDIiLCJleHAiOjE1ODQzMjAzMDB9.zyuUNXdeOg9zA5yIUH-d9AXSpx0m7DT7A1Rv1D2IBGVhaqTE8S4RtzW66olrS4ObxXnEA5C7btLLLkYyrW9dqg";
+    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZDIiLCJleHAiOjE1ODQzMjAzMDB9.zyuUNXdeOg9zA5yIUH-d9AXSpx0m7DT7A1Rv1D2IBGVhaqTE8S4RtzW66olrS4ObxXnEA5C7btLLLkYyrW9dqg";
     private Retrofit retrofit;
     private RecyclerView listFlashcard;
     public static String KEY_ID = "KEY_ID";
+    private ArrayList<CardSetModel> flashcards;
+
+
+    EditText edTextSearch;
+    ImageView imgSearch;
 
 
     @Nullable
@@ -52,12 +60,53 @@ public class FlashcardFragment extends Fragment {
         listFlashcard = view.findViewById(R.id.listItemFlashcard);
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
+        edTextSearch = view.findViewById(R.id.txtTextSearch);
+        imgSearch = view.findViewById(R.id.searchView);
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String txtSearch = edTextSearch.getText().toString();
+                System.out.println(flashcards.size());
+                if (flashcards != null) {
+                    ArrayList<CardSetModel> flashcardsSearch = new ArrayList<>();
+                    for (CardSetModel item : flashcards) {
+                        if (item.getName().toLowerCase().contains(txtSearch.toLowerCase())) {
+                            flashcardsSearch.add(item);
+                        }
+                    }
+                    FlashcardAdapter termFlashcardAdapter = new FlashcardAdapter(flashcardsSearch);
+                    termFlashcardAdapter.setOnItemClickListener(new FlashcardAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(String id) {
+                            Intent intent = new Intent(getContext(), FlashcardDetailActivity.class);
+                            intent.putExtra(KEY_ID, id);
+                            startActivity(intent);
+                        }
+                    });
+                    listFlashcard.setAdapter(termFlashcardAdapter);
+                }
+            }
+        });
+
+
+        return view;
+    }
+
+    public void onCreateFlashcard(View view) {
+        Intent intent = new Intent(getContext(), CreateFlashCardActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         iHintService.getAllFlashcard(token).enqueue(new Callback<BodyCardSetModel>() {
             @Override
             public void onResponse(Call<BodyCardSetModel> call, Response<BodyCardSetModel> response) {
                 int code = response.code();
-                if(code == 200){
-                    final ArrayList<CardSetModel> flashcards = response.body().getBody();
+                if (code == 200) {
+                    flashcards = response.body().getBody();
                     FlashcardAdapter termFlashcardAdapter = new FlashcardAdapter(flashcards);
                     //Set onClickListener in Adapter:
                     //From HomeFlashcard To Flashcard Detail
@@ -74,7 +123,7 @@ public class FlashcardFragment extends Fragment {
                     layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                     listFlashcard.setLayoutManager(layoutManager);
                     listFlashcard.setAdapter(termFlashcardAdapter);
-                }else {
+                } else {
                     ErrorDialog errorDialog = new ErrorDialog("API can not work");
                     errorDialog.show(getFragmentManager(), "Example");
                 }
@@ -86,13 +135,5 @@ public class FlashcardFragment extends Fragment {
             }
         });
 
-
-
-
-        return view;
-    }
-    public void onCreateFlashcard(View view){
-        Intent intent = new Intent(getContext(), CreateFlashCardActivity.class);
-        startActivity(intent);
     }
 }
