@@ -1,10 +1,10 @@
 package com.example.dictionary.model;
 
-public class DetailModel {
+import java.util.ArrayList;
 
-    String messages;
-    String success;
-    WordModel body;
+public class BodyCardDetailModel {
+    private String messages, success;
+    private Card body;
 
     public String getMessages() {
         return messages;
@@ -22,11 +22,11 @@ public class DetailModel {
         this.success = success;
     }
 
-    public WordModel getBody() {
+    public Card getBody() {
         return body;
     }
 
-    public void setBody(WordModel body) {
+    public void setBody(Card body) {
         this.body = body;
     }
 }

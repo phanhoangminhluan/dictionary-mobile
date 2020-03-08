@@ -2,19 +2,19 @@ package com.example.dictionary.model;
 
 import java.util.ArrayList;
 
-public class BodyGetDetailText {
+public class WordModel {
     String word;
-    ArrayList<DefinitionDetailGetText> definitionDetails;
+    ArrayList<WordDefinitionDetailModel> definitionDetails;
     ArrayList<String> syllableList;
     String pronunciation;
     Integer frequency;
 
 
-    public ArrayList<DefinitionDetailGetText> getDefinitionDetails() {
+    public ArrayList<WordDefinitionDetailModel> getDefinitionDetails() {
         return definitionDetails;
     }
 
-    public void setDefinitionDetails(ArrayList<DefinitionDetailGetText> definitionDetails) {
+    public void setDefinitionDetails(ArrayList<WordDefinitionDetailModel> definitionDetails) {
         this.definitionDetails = definitionDetails;
     }
 

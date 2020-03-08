@@ -10,18 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dictionary.R;
+import com.example.dictionary.model.Card;
 
 import java.util.ArrayList;
 
 public class TermFlashcardAdapter  extends RecyclerView.Adapter<TermFlashcardAdapter.TermHolder>  {
-    private ArrayList<String> texts;
+    private ArrayList<Card> texts;
     private TermFlashcardAdapter.OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(TermFlashcardAdapter.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public TermFlashcardAdapter(ArrayList<String> texts) {
+    public TermFlashcardAdapter(ArrayList<Card> texts) {
         this.texts = texts;
     }
 
@@ -35,7 +36,7 @@ public class TermFlashcardAdapter  extends RecyclerView.Adapter<TermFlashcardAda
 
     @Override
     public void onBindViewHolder(@NonNull TermHolder holder, int position) {
-        holder.txtTermCard.setText(texts.get(position));
+        holder.txtTermCard.setText(texts.get(position).getDefinition());
 
     }
 

@@ -2,7 +2,7 @@ package com.example.dictionary.model;
 
 import java.util.ArrayList;
 
-public class DefinitionDetailGetText {
+public class WordDefinitionDetailModel {
     String definition;
     String partOfSpeech;
     ArrayList<String> examples;

@@ -30,6 +30,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class HomeFragment extends Fragment {
+    public static String KEY_TEXT_SEARCH = "KEY_TEXT_SEARCH";
     private IHintService iHintService = null;
     private ImageView btnSearch;
     private EditText searchText;
@@ -79,7 +80,7 @@ public class HomeFragment extends Fragment {
                                 @Override
                                 public void onItemClick(String text) {
                                     Intent intent = new Intent(getContext(), DetailActivity.class);
-                                    intent.putExtra("hi", text);
+                                    intent.putExtra(KEY_TEXT_SEARCH, text);
                                     startActivity(intent);
 
                                 }

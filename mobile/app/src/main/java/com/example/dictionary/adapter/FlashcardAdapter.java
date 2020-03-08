@@ -10,20 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dictionary.R;
-import com.example.dictionary.model.BodyGetDetailFlashcardModel;
+import com.example.dictionary.model.CardSetModel;
 
 import java.util.ArrayList;
 
 public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.FlashcardHolder> {
-    private ArrayList<BodyGetDetailFlashcardModel> bodyGetDetailFlashcardModels;
+    private ArrayList<CardSetModel> cardSetModels;
     private FlashcardAdapter.OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public FlashcardAdapter(ArrayList<BodyGetDetailFlashcardModel> bodyGetDetailFlashcardModels) {
-        this.bodyGetDetailFlashcardModels = bodyGetDetailFlashcardModels;
+    public FlashcardAdapter(ArrayList<CardSetModel> cardSetModels) {
+        this.cardSetModels = cardSetModels;
     }
 
     @NonNull
@@ -36,16 +36,15 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
 
     @Override
     public void onBindViewHolder(@NonNull FlashcardHolder holder, int position) {
-        holder.txtName.setText(bodyGetDetailFlashcardModels.get(position).getName());
-        holder.txtUsername.setText(bodyGetDetailFlashcardModels.get(position).getUsername());
-        holder.txtCardsCount.setText(bodyGetDetailFlashcardModels.get(position).getCards().size()+ " terms");
-
+        holder.txtName.setText(cardSetModels.get(position).getName());
+        holder.txtUsername.setText(cardSetModels.get(position).getUsername());
+        holder.txtCardsCount.setText(cardSetModels.get(position).getCards().size()+ " terms");
 
     }
 
     @Override
     public int getItemCount() {
-        return bodyGetDetailFlashcardModels.size();
+        return cardSetModels.size();
     }
 
     class FlashcardHolder extends RecyclerView.ViewHolder {
@@ -64,7 +63,7 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if(onItemClickListener != null && position != RecyclerView.NO_POSITION){
-                        onItemClickListener.onItemClick(bodyGetDetailFlashcardModels.get(position).getId());
+                        onItemClickListener.onItemClick(cardSetModels.get(position).getId());
                     }
                 }
             });

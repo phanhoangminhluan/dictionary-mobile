@@ -2,10 +2,9 @@ package com.example.dictionary.model;
 
 import java.util.ArrayList;
 
-public class FlashcardModel {
-    private String messages;
-    private ArrayList<BodyGetDetailFlashcardModel> body;
-    private String success;
+public class BodyCardModel {
+    private String messages, success;
+    private ArrayList<Card> body;
 
     public String getMessages() {
         return messages;
@@ -15,19 +14,19 @@ public class FlashcardModel {
         this.messages = messages;
     }
 
-    public ArrayList<BodyGetDetailFlashcardModel> getBody() {
-        return body;
-    }
-
-    public void setBody(ArrayList<BodyGetDetailFlashcardModel> body) {
-        this.body = body;
-    }
-
     public String getSuccess() {
         return success;
     }
 
     public void setSuccess(String success) {
         this.success = success;
+    }
+
+    public ArrayList<Card> getBody() {
+        return body;
+    }
+
+    public void setBody(ArrayList<Card> body) {
+        this.body = body;
     }
 }

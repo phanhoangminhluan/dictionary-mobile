@@ -1,11 +1,10 @@
 package com.example.dictionary.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-public class BodyGetDetailFlashcardModel {
+public class CardSetModel {
     String id, name, username, cardSetSessionId;
-    ArrayList<CardsDetailModel> cards;
+    ArrayList<Card> cards;
 
     public String getId() {
         return id;
@@ -41,11 +40,11 @@ public class BodyGetDetailFlashcardModel {
 
 
 
-    public ArrayList<CardsDetailModel> getCards() {
+    public ArrayList<Card> getCards() {
         return cards;
     }
 
-    public void setCards(ArrayList<CardsDetailModel> cards) {
+    public void setCards(ArrayList<Card> cards) {
         this.cards = cards;
     }
 }

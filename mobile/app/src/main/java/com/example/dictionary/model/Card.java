@@ -1,6 +1,6 @@
 package com.example.dictionary.model;
 
-public class CardsDetailModel {
+public class Card {
     String id, term, definition,cardSetId;
 
     public String getId() {

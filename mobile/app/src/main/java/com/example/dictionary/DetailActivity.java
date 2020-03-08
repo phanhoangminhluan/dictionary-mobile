@@ -6,16 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Spanned;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dictionary.adapter.TextAdapter;
-import com.example.dictionary.model.BodyGetDetailText;
+import com.example.dictionary.fragment.HomeFragment;
 import com.example.dictionary.model.DetailModel;
-import com.example.dictionary.model.TextModel;
 import com.example.dictionary.service.IHintService;
 import com.example.dictionary.service.RetrofitClient;
 
@@ -41,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
         Intent intent = getIntent();
-        String text = intent.getStringExtra("hi");
+        String text = intent.getStringExtra(HomeFragment.KEY_TEXT_SEARCH);
         iHintService.getDetailText(text).enqueue(new Callback<DetailModel>() {
             @Override
             public void onResponse(Call<DetailModel> call, Response<DetailModel> response) {
