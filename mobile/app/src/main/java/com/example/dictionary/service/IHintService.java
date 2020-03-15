@@ -3,7 +3,10 @@ package com.example.dictionary.service;
 import com.example.dictionary.model.BodyCardDetailModel;
 import com.example.dictionary.model.BodyCardModel;
 import com.example.dictionary.model.BodyCardSetDetailModel;
+import com.example.dictionary.model.BodyCardsetLearnModel;
+import com.example.dictionary.model.BodyCountModel;
 import com.example.dictionary.model.BodyCreateCard;
+import com.example.dictionary.model.BodyRememberForgetFlashcardModel;
 import com.example.dictionary.model.Card;
 import com.example.dictionary.model.CreateCardSetModel;
 import com.example.dictionary.model.DetailModel;
@@ -47,6 +50,23 @@ public interface IHintService {
 
     @DELETE("dictionary-flashcard/card/{id}")
     Call<BodyCardDetailModel> deleteFlashcard(@Header("Authorization") String token, @Path("id") String id);
+
+    @POST("dictionary-flashcard/flashcard/learn/{cardSetId}")
+    Call<BodyCardsetLearnModel> createToLearn(@Header("Authorization") String token, @Path("cardSetId") String cardSetId);
+
+
+    @GET("dictionary-flashcard/flashcard/reset-progress/{id}")
+    Call<BodyCardsetLearnModel> resetProgress(@Header("Authorization") String token, @Path("id") String id);
+
+    @PUT("dictionary-flashcard/flashcard/forget/{cardSetSessionId}/{cardId}")
+    Call<BodyRememberForgetFlashcardModel> forgetFlashcard(@Header("Authorization") String token,  @Path("cardSetSessionId") String cardSetSessionId, @Path("cardId") String cardId);
+
+    @PUT("dictionary-flashcard/flashcard/remember/{cardSetSessionId}/{cardId}")
+    Call<BodyRememberForgetFlashcardModel> rememberFlashcard(@Header("Authorization") String token,  @Path("cardSetSessionId") String cardSetSessionId, @Path("cardId") String cardId);
+
+    @GET("dictionary-flashcard/flashcard/count/{id}")
+    Call<BodyCountModel> getCountFlashcard(@Header("Authorization") String token, @Path("id") String id);
+
 
 
 }

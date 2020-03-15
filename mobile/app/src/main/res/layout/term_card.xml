@@ -13,12 +13,13 @@
         android:gravity="center"
         android:textSize="20dp"
         android:text="Hi Term Card"/>
+
     <ImageView
         android:id="@+id/btnZoom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="150dp"
+        android:layout_height="23dp"
         android:layout_marginLeft="330dp"
-        android:src="@drawable/ic_zoom"/>
+        android:minHeight="150dp"
+        android:src="@drawable/ic_zoom" />
 
 </LinearLayout>

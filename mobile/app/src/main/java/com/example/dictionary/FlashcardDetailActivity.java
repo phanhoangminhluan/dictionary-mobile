@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dictionary.adapter.CardAdapter;
@@ -15,6 +17,7 @@ import com.example.dictionary.dialog.DeleteDialog;
 import com.example.dictionary.fragment.FlashcardFragment;
 import com.example.dictionary.model.BodyCardModel;
 import com.example.dictionary.model.BodyCardSetDetailModel;
+import com.example.dictionary.model.BodyCardsetLearnModel;
 import com.example.dictionary.model.Card;
 import com.example.dictionary.service.IHintService;
 import com.example.dictionary.service.RetrofitClient;
@@ -34,9 +37,37 @@ public class FlashcardDetailActivity extends AppCompatActivity {
     private TextView txtName;
     private TextView txtUsername;
     private  TextView txtCardCount;
+    private ImageView imgFlashcards;
+    String id;
+    public static String KEY_SESSION = "KEY_SESSION";
+    public static String KEY_CARD_SET = "KEY_CARD_SET";
+
     public static String KEY_FLASHCARD_ID = "KEY_FLASHCARD_ID";
     public static String KEY_FLASHCARD_TERM = "KEY_FLASHCARD_TERM";
     public static String KEY_FLASHCARD_DEFINITION = "KEY_FLASHCARD_DEFINITION";
+
+    private void clickToLearn(){
+
+        retrofit = RetrofitClient.getClient();
+        iHintService = retrofit.create(IHintService.class);
+        iHintService.createToLearn(token, id).enqueue(new Callback<BodyCardsetLearnModel>() {
+            @Override
+            public void onResponse(Call<BodyCardsetLearnModel> call, Response<BodyCardsetLearnModel> response) {
+                if(response.code() == 201){
+                    Intent intent = new Intent(getBaseContext(), FlashcardTermActivity.class);
+                    intent.putExtra(KEY_SESSION, response.body().getBody().getCardSetSessionId() );
+                    intent.putExtra(KEY_CARD_SET, response.body().getBody().getCardSetId());
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BodyCardsetLearnModel> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     public static final int DELETE_DIALOG_FRAGMENT = 1;
 
@@ -46,14 +77,20 @@ public class FlashcardDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flashcard_detail);
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
-
+        imgFlashcards = findViewById(R.id.imgFlashcards);
+        imgFlashcards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               clickToLearn();
+            }
+        });
+        Intent intent = getIntent();
+         id = intent.getStringExtra(FlashcardFragment.KEY_ID);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Intent intent = getIntent();
-        String id = intent.getStringExtra(FlashcardFragment.KEY_ID);
         iHintService.getAllFlashcardDetail(token,id).enqueue(new Callback<BodyCardSetDetailModel>() {
             @Override
             public void onResponse(Call<BodyCardSetDetailModel> call, final Response<BodyCardSetDetailModel> response) {
@@ -112,9 +149,9 @@ public class FlashcardDetailActivity extends AppCompatActivity {
                         termAdapter.setOnItemClickListener(new TermFlashcardAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(String text) {
-                                Intent intent = new Intent(getBaseContext(), FlashcardTermActivity.class);
-                                startActivity(intent);
-
+//                                Intent intent = new Intent(getBaseContext(), FlashcardTermActivity.class);
+//                                startActivity(intent);
+                                    clickToLearn();
                             }
                         });
 
