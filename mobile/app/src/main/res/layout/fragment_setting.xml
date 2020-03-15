@@ -1,77 +1,350 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constrainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="388dp"
         android:layout_height="wrap_content"
-        android:minHeight="50dp"
-        android:src="@drawable/ic_person" />
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/txtUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hoai_Thuong"
-        android:textAlignment="center"
-        android:textSize="25dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="View profile"
-        android:textAlignment="center"
-        android:textColor="#008080"
-        android:textSize="20dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="Username"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="Hoai_Thuong"
-            android:textColor="#008080"
-            android:textSize="20dp" />
-    </LinearLayout>
-
-        <TextView
-            android:layout_width="190dp"
-            android:layout_height="50dp"
-            android:text="Change password"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="Log out"
-            android:textColor="#008080"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="VERSION 4.0 BUILD 2"
-            android:layout_marginTop="300dp"
-            android:textAlignment="center"
-            android:textColor="#808080"
-            android:textSize="20dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="112dp"
+                app:srcCompat="@mipmap/ic_launcher" />
 
+            <TextView
+                android:id="@+id/largeUsernameTxt"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center|center_vertical"
+                android:text="Hoai Thuong"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
 
+            <TextView
+                android:id="@+id/viewProfileTxt"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="View profile"
+                android:textColor="#00BCD4"
+                android:textSize="18sp" />
 
-</LinearLayout>
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#EDEDED" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="168dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/accountTypeTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="bottom|center_vertical"
+                        android:text="Account Type"
+                        android:textColor="@color/common_google_signin_btn_text_light_focused"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/accountStateTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Free"
+                        android:textColor="#00BCD4" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/upgradeBtn"
+                        style="@style/Widget.AppCompat.ButtonBar"
+                        android:layout_width="128dp"
+                        android:layout_height="36dp"
+                        android:background="#00BCD4"
+                        android:text="Upgrade: Free trial"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.836"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.571" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#EDEDED" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/emailTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="bottom|center_vertical"
+                    android:text="Email"
+                    android:textColor="@color/common_google_signin_btn_text_light_focused"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/emailInfoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="thuongdt@gmail.com"
+                    android:textColor="#00BCD4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/usernameTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="bottom|center_vertical"
+                    android:text="Username"
+                    android:textColor="@color/common_google_signin_btn_text_light_focused"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/usernameInfoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="thuongdt"
+                    android:textColor="#00BCD4" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/changePasswordTxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="Change password"
+                android:textColor="@color/common_google_signin_btn_text_light_focused"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/notificationsTxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="Notifications"
+                android:textColor="@color/common_google_signin_btn_text_light_focused"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#EDEDED" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/nightthemeTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Night theme"
+                    android:textColor="@color/common_google_signin_btn_text_light_focused"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/nightthemeStateTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_horizontal|center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="off"
+                    android:textColor="#00BCD4" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#EDEDED" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="241dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/saveSetsTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="bottom|center_vertical"
+                        android:text="Save sets for offline use"
+                        android:textColor="@color/common_google_signin_btn_text_light_focused"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/saveDescriptionTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Recent sets will not be downloaded" />
+
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/saveForOfflineSw"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#EDEDED" />
+
+            <TextView
+                android:id="@+id/helpTxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="Helps Center"
+                android:textColor="@color/common_google_signin_btn_text_light_focused"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#EDEDED" />
+
+            <TextView
+                android:id="@+id/rateTxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="Rate us!"
+                android:textColor="@color/common_google_signin_btn_text_light_focused"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/divider7"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#EDEDED" />
+
+            <TextView
+                android:id="@+id/aboutTxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="About"
+                android:textColor="@color/common_google_signin_btn_text_light_focused"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/versionTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="Version"
+                    android:textColor="@color/common_google_signin_btn_text_light_focused"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/versionInfoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="0.1.2.3" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider8"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#EDEDED" />
+
+            <TextView
+                android:id="@+id/logoutTxt"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:text="Log out"
+                android:textColor="#00BCD4"
+                android:textSize="16dp" />
+
+            <View
+                android:id="@+id/divider9"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#EDEDED" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
