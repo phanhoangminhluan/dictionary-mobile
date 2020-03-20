@@ -6,11 +6,15 @@ import com.example.dictionary.model.BodyCardSetDetailModel;
 import com.example.dictionary.model.BodyCardsetLearnModel;
 import com.example.dictionary.model.BodyCountModel;
 import com.example.dictionary.model.BodyCreateCard;
+import com.example.dictionary.model.BodyLoginModel;
+import com.example.dictionary.model.BodyRegisterModel;
 import com.example.dictionary.model.BodyRememberForgetFlashcardModel;
 import com.example.dictionary.model.Card;
 import com.example.dictionary.model.CreateCardSetModel;
 import com.example.dictionary.model.DetailModel;
 import com.example.dictionary.model.BodyCardSetModel;
+import com.example.dictionary.model.LoginViewModel;
+import com.example.dictionary.model.RegisterModel;
 import com.example.dictionary.model.TextModel;
 
 import retrofit2.Call;
@@ -66,6 +70,13 @@ public interface IHintService {
 
     @GET("dictionary-flashcard/flashcard/count/{id}")
     Call<BodyCountModel> getCountFlashcard(@Header("Authorization") String token, @Path("id") String id);
+
+    @POST("dictionary-flashcard/login")
+    Call<BodyLoginModel> loginSuccess(@Body LoginViewModel loginViewModel);
+
+    @POST("dictionary-flashcard/user/register")
+    Call<BodyRegisterModel> registerAcccount(@Body RegisterModel registerModel);
+
 
 
 

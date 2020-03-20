@@ -47,6 +47,27 @@ public class HomeFragment extends Fragment {
         textList = view.findViewById(R.id.textList);
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
+        searchText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String textSearch = searchText.getText().toString();
+                iHintService.searchText(textSearch).enqueue(new Callback<TextModel>() {
+                    @Override
+                    public void onResponse(Call<TextModel> call, Response<TextModel> response) {
+                        if(response.code() == 200){
+                            System.out.println("Search de");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TextModel> call, Throwable t) {
+                            t.printStackTrace();
+                    }
+                });
+
+
+            }
+        });
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +110,6 @@ public class HomeFragment extends Fragment {
                             ErrorDialog errorDialog = new ErrorDialog(textSearch);
                             errorDialog.show(getFragmentManager(), "Example");
                         }
-
-
                     }
 
                     @Override

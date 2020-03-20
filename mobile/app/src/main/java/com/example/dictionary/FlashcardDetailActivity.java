@@ -21,6 +21,7 @@ import com.example.dictionary.model.BodyCardsetLearnModel;
 import com.example.dictionary.model.Card;
 import com.example.dictionary.service.IHintService;
 import com.example.dictionary.service.RetrofitClient;
+import com.example.dictionary.service.SharePreferenceService;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class FlashcardDetailActivity extends AppCompatActivity {
-    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZDIiLCJleHAiOjE1ODQ1ODc2OTF9.LuVVlNSj5dGiyy91HiC-dz2ypDkQ3pgJqsyfHy2ZJOmxFLZwTkscSH8WnmKCDzRX9j8Q6IuqHW7gboe_KvqXFg";
     private IHintService iHintService = null;
     private Retrofit retrofit;
     private RecyclerView listTerm_Definition;
@@ -39,6 +39,7 @@ public class FlashcardDetailActivity extends AppCompatActivity {
     private  TextView txtCardCount;
     private ImageView imgFlashcards;
     String id;
+    private SharePreferenceService sharePreferenceService;
     public static String KEY_SESSION = "KEY_SESSION";
     public static String KEY_CARD_SET = "KEY_CARD_SET";
 
@@ -50,7 +51,8 @@ public class FlashcardDetailActivity extends AppCompatActivity {
 
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
-        iHintService.createToLearn(token, id).enqueue(new Callback<BodyCardsetLearnModel>() {
+
+        iHintService.createToLearn(sharePreferenceService.getToken(), id).enqueue(new Callback<BodyCardsetLearnModel>() {
             @Override
             public void onResponse(Call<BodyCardsetLearnModel> call, Response<BodyCardsetLearnModel> response) {
                 if(response.code() == 201){
@@ -74,6 +76,7 @@ public class FlashcardDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharePreferenceService = SharePreferenceService.getInstance(getBaseContext());
         setContentView(R.layout.activity_flashcard_detail);
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
@@ -91,7 +94,7 @@ public class FlashcardDetailActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        iHintService.getAllFlashcardDetail(token,id).enqueue(new Callback<BodyCardSetDetailModel>() {
+        iHintService.getAllFlashcardDetail(sharePreferenceService.getToken(),id).enqueue(new Callback<BodyCardSetDetailModel>() {
             @Override
             public void onResponse(Call<BodyCardSetDetailModel> call, final Response<BodyCardSetDetailModel> response) {
                 listTerm_Definition = findViewById(R.id.listTermAndDefinition);
@@ -149,8 +152,6 @@ public class FlashcardDetailActivity extends AppCompatActivity {
                         termAdapter.setOnItemClickListener(new TermFlashcardAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(String text) {
-//                                Intent intent = new Intent(getBaseContext(), FlashcardTermActivity.class);
-//                                startActivity(intent);
                                     clickToLearn();
                             }
                         });

@@ -41,6 +41,7 @@
                 android:textSize="20dp" />
 
             <EditText
+                android:id="@+id/txtPw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -50,6 +51,7 @@
                 android:textSize="20dp"
             />
             <EditText
+                android:id="@+id/txtPw2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -58,6 +60,14 @@
                 android:inputType="textPassword"
                 android:textSize="20dp"
                 />
+            <EditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textColorHint="@color/cardview_dark_background"
+                android:hint="Email"
+                android:textSize="20dp" />
             <Button
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"

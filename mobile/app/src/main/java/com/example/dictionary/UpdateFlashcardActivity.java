@@ -11,6 +11,7 @@ import com.example.dictionary.model.BodyCardModel;
 import com.example.dictionary.model.Card;
 import com.example.dictionary.service.IHintService;
 import com.example.dictionary.service.RetrofitClient;
+import com.example.dictionary.service.SharePreferenceService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,15 +22,16 @@ public class UpdateFlashcardActivity extends AppCompatActivity {
     String id;
     EditText edTerm;
     EditText edDefinition;
-    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZDIiLCJleHAiOjE1ODQ1ODc2OTF9.LuVVlNSj5dGiyy91HiC-dz2ypDkQ3pgJqsyfHy2ZJOmxFLZwTkscSH8WnmKCDzRX9j8Q6IuqHW7gboe_KvqXFg";
     private IHintService iHintService = null;
     private Retrofit retrofit;
+    private SharePreferenceService sharePreferenceService;
     private Card cardsDetailModel;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharePreferenceService = SharePreferenceService.getInstance(getBaseContext());
         setContentView(R.layout.activity_update_flashcard);
         Intent intent = getIntent();
         id = intent.getStringExtra(FlashcardDetailActivity.KEY_FLASHCARD_ID);
@@ -55,7 +57,7 @@ public class UpdateFlashcardActivity extends AppCompatActivity {
         cardsDetailModel.setTerm(edTerm.getText().toString());
         cardsDetailModel.setDefinition(edDefinition.getText().toString());
 
-        iHintService.updateFlashcard(token, cardsDetailModel).enqueue(new Callback<BodyCardModel>() {
+        iHintService.updateFlashcard(sharePreferenceService.getToken(), cardsDetailModel).enqueue(new Callback<BodyCardModel>() {
             @Override
             public void onResponse(Call<BodyCardModel> call, Response<BodyCardModel> response) {
                 if (response.code() == 202) {

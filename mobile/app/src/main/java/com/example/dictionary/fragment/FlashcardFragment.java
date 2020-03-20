@@ -25,6 +25,7 @@ import com.example.dictionary.model.CardSetModel;
 import com.example.dictionary.model.BodyCardSetModel;
 import com.example.dictionary.service.IHintService;
 import com.example.dictionary.service.RetrofitClient;
+import com.example.dictionary.service.SharePreferenceService;
 
 import java.util.ArrayList;
 
@@ -35,12 +36,11 @@ import retrofit2.Retrofit;
 
 public class FlashcardFragment extends Fragment {
     private IHintService iHintService = null;
-    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZDIiLCJleHAiOjE1ODQzMjAzMDB9.zyuUNXdeOg9zA5yIUH-d9AXSpx0m7DT7A1Rv1D2IBGVhaqTE8S4RtzW66olrS4ObxXnEA5C7btLLLkYyrW9dqg";
     private Retrofit retrofit;
     private RecyclerView listFlashcard;
     public static String KEY_ID = "KEY_ID";
     private ArrayList<CardSetModel> flashcards;
-
+    private SharePreferenceService sharePreferenceService;
 
     EditText edTextSearch;
     ImageView imgSearch;
@@ -66,7 +66,6 @@ public class FlashcardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String txtSearch = edTextSearch.getText().toString();
-                System.out.println(flashcards.size());
                 if (flashcards != null) {
                     ArrayList<CardSetModel> flashcardsSearch = new ArrayList<>();
                     for (CardSetModel item : flashcards) {
@@ -100,8 +99,8 @@ public class FlashcardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        iHintService.getAllFlashcard(token).enqueue(new Callback<BodyCardSetModel>() {
+        sharePreferenceService = SharePreferenceService.getInstance(getContext());
+        iHintService.getAllFlashcard(sharePreferenceService.getToken()).enqueue(new Callback<BodyCardSetModel>() {
             @Override
             public void onResponse(Call<BodyCardSetModel> call, Response<BodyCardSetModel> response) {
                 int code = response.code();

@@ -16,6 +16,7 @@ import com.example.dictionary.model.Card;
 import com.example.dictionary.model.CreateCardSetModel;
 import com.example.dictionary.service.IHintService;
 import com.example.dictionary.service.RetrofitClient;
+import com.example.dictionary.service.SharePreferenceService;
 
 import java.util.ArrayList;
 
@@ -28,15 +29,17 @@ public class CreateFlashCardActivity extends AppCompatActivity {
 
     private RecyclerView listCreateCards;
     ArrayList<Card> cards = new ArrayList<Card>();
-    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZDIiLCJleHAiOjE1ODQ1ODc2OTF9.LuVVlNSj5dGiyy91HiC-dz2ypDkQ3pgJqsyfHy2ZJOmxFLZwTkscSH8WnmKCDzRX9j8Q6IuqHW7gboe_KvqXFg";
     private IHintService iHintService = null;
     private Retrofit retrofit;
     private CreateCardSetModel createCardSetModel;
     private EditText edTitle;
+    private SharePreferenceService sharePreferenceService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharePreferenceService = SharePreferenceService.getInstance(getBaseContext());
         setContentView(R.layout.activity_create_flash_card);
         listCreateCards = findViewById(R.id.listCreateCard);
         edTitle = findViewById(R.id.edTitle);
@@ -132,7 +135,7 @@ public class CreateFlashCardActivity extends AppCompatActivity {
         createCardSetModel.setCards(cards);
         createCardSetModel.setName(edTitle.getText().toString());
 
-        iHintService.createCardSet(token, createCardSetModel).enqueue(new Callback<BodyCreateCard>() {
+        iHintService.createCardSet(sharePreferenceService.getToken(), createCardSetModel).enqueue(new Callback<BodyCreateCard>() {
             @Override
             public void onResponse(Call<BodyCreateCard> call, Response<BodyCreateCard> response) {
                 System.out.println(response.code());

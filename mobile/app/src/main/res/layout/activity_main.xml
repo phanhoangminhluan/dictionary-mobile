@@ -43,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                android:inputType="textPassword"
                 android:hint=" Enter Password"
                 android:textSize="20dp" />
 
@@ -55,28 +56,28 @@
                 android:onClick="clickToHomePage"
                 android:textSize="25dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="Or login via"
-                android:textAlignment="center"
-                android:textSize="20dp"
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:text="Or login via"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textSize="20dp"-->
 
-                />
+<!--                />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <com.google.android.gms.common.SignInButton
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content" />
+<!--                <com.google.android.gms.common.SignInButton-->
+<!--                    android:layout_width="200dp"-->
+<!--                    android:layout_height="wrap_content" />-->
 
-                <com.google.android.gms.common.SignInButton
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+<!--                <com.google.android.gms.common.SignInButton-->
+<!--                    android:layout_width="200dp"-->
+<!--                    android:layout_height="wrap_content" />-->
+<!--            </LinearLayout>-->
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

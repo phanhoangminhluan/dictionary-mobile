@@ -30,5 +30,8 @@ public class CreateWordActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
-
+//public class Login2Model(String username, String password){
+//
+//        }
+//
 

@@ -74,6 +74,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardHolder> {
                     int position = getAdapterPosition();
                     if(onItemClickListener != null && position != RecyclerView.NO_POSITION){
                         onItemClickListener.onItemClickDelete(cardsDetailModels.get(position).getId(), cardsDetailModels.get(position).getTerm());
+                        System.out.println(cardsDetailModels.get(position).getId());
                     }
                 }
             });
