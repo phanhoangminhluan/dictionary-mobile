@@ -43,6 +43,13 @@
                         android:text="/pronuciation/"
                         android:textColor="#440000"
                         android:textSize="22dp" />
+                    <ToggleButton
+                        android:id="@+id/toogleLove"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:textOff="Dislove"
+                        android:textOn="Love" />
                 </LinearLayout>
 
                 <LinearLayout

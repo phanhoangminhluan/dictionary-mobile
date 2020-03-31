@@ -138,7 +138,6 @@ public class CreateFlashCardActivity extends AppCompatActivity {
         iHintService.createCardSet(sharePreferenceService.getToken(), createCardSetModel).enqueue(new Callback<BodyCreateCard>() {
             @Override
             public void onResponse(Call<BodyCreateCard> call, Response<BodyCreateCard> response) {
-                System.out.println(response.code());
                 if (response.code() == 201) {
                     if (response.body().getMessages() != null) {
                         finish();

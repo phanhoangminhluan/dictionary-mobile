@@ -60,10 +60,6 @@ public class SignUpActivity extends AppCompatActivity {
                 else {
                     RegistorDialog registorDialog = new RegistorDialog();
                     registorDialog.show(getSupportFragmentManager(), "ERROR");
-                    System.out.println(response.code());
-                    System.out.println("Day la 1"+registerModel.getUsername());
-                    System.out.println("Day la 2"+ response.body().getBody().getEmail());
-
                 }
             }
 

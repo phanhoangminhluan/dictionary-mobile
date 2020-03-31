@@ -6,9 +6,12 @@ import com.example.dictionary.model.BodyCardSetDetailModel;
 import com.example.dictionary.model.BodyCardsetLearnModel;
 import com.example.dictionary.model.BodyCountModel;
 import com.example.dictionary.model.BodyCreateCard;
+import com.example.dictionary.model.BodyFavorite;
+import com.example.dictionary.model.BodyFavoriteWord;
 import com.example.dictionary.model.BodyLoginModel;
 import com.example.dictionary.model.BodyRegisterModel;
 import com.example.dictionary.model.BodyRememberForgetFlashcardModel;
+import com.example.dictionary.model.BodyWordModel;
 import com.example.dictionary.model.Card;
 import com.example.dictionary.model.CreateCardSetModel;
 import com.example.dictionary.model.DetailModel;
@@ -29,6 +32,8 @@ import retrofit2.http.Path;
 public interface IHintService {
     @GET("dictionary-flashcard/hint/{textSearch}")
     Call<TextModel> searchText(@Path("textSearch") String textSearch);
+    @POST("dictionary-flashcard/word")
+    Call<BodyWordModel> createWord(@Header("Authorization") String token, @Body BodyWordModel bodyWordModel);
 
     @GET("dictionary-flashcard/word/{textDetail}")
     Call<DetailModel> getDetailText(@Path("textDetail") String textDetail);//ToDo 1 DetailModel o1 gọi
@@ -77,6 +82,16 @@ public interface IHintService {
     @POST("dictionary-flashcard/user/register")
     Call<BodyRegisterModel> registerAcccount(@Body RegisterModel registerModel);
 
+    @POST("dictionary-flashcard/favorite-word/{word}")
+    Call<BodyFavoriteWord> createFavoriteWord(@Header("Authorization") String token, @Path("word") String word);
+
+    @DELETE("dictionary-flashcard/favorite-word/{word}")
+    Call<BodyFavoriteWord> deleteFavoriteWord(@Header("Authorization")String token, @Path("word") String word);
+    @GET("dictionary-flashcard/favorite-word")
+    Call<BodyFavoriteWord> getFavoriteWords(@Header("Authorization")String token);
+
+    @GET("dictionary-flashcard/favorite-word")
+    Call<BodyFavorite> getListWords(@Header("Authorization")String token);
 
 
 
