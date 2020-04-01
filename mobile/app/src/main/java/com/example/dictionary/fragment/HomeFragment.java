@@ -85,6 +85,7 @@ public class HomeFragment extends Fragment {
                                 }
                             });
                         }
+
                     }
 
                     @Override
@@ -103,18 +104,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final String textSearch = searchText.getText().toString();
-
-
-//                System.out.println(textSearch);
-//                List<String> texts = hintService.searchText(textSearch);
-//
-//                if(texts == null) {
-//                    textresult = "Not Found";
-//                }else {
-//                    for (int i = 0; i < texts.size(); i++){
-//                        textresult = textresult + " " + texts.get(i);
-//                    }
-//                }
                 iHintService.searchText(textSearch).enqueue(new Callback<TextModel>() {
 
                     @Override

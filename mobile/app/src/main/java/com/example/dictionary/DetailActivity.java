@@ -8,12 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.dictionary.adapter.TextAdapter;
+import com.example.dictionary.dialog.ErrorDialog;
 import com.example.dictionary.fragment.FavoriteFragment;
 import com.example.dictionary.fragment.HomeFragment;
+import com.example.dictionary.model.BodyFavorite;
 import com.example.dictionary.model.BodyFavoriteWord;
 import com.example.dictionary.model.DetailModel;
 import com.example.dictionary.service.IHintService;
@@ -35,6 +38,9 @@ public class DetailActivity extends AppCompatActivity {
     private RecyclerView derivation;
     private TextView word;
     private SharePreferenceService sharePreferenceService;
+    private ToggleButton toggle;
+    private String text;
+    private ProgressBar spinner;
     public static String KEY_TEXT_CREATE = "KEY_TEXT_CREATE";
     public static String KEY_TEXT_DELETE = "KEY_TEXT_DELETE";
 
@@ -47,15 +53,19 @@ public class DetailActivity extends AppCompatActivity {
         sharePreferenceService = SharePreferenceService.getInstance(getBaseContext());
         word = (TextView) findViewById(R.id.word);
 
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+
         final Intent intent = getIntent();
-        String text = intent.getStringExtra(HomeFragment.KEY_TEXT_SEARCH);
+         text = intent.getStringExtra(HomeFragment.KEY_TEXT_SEARCH);
         iHintService.getDetailText(text).enqueue(new Callback<DetailModel>() {
             @Override
             public void onResponse(Call<DetailModel> call, Response<DetailModel> response) {
+                System.out.println("Day la detail"+response.code());
                 example = findViewById(R.id.example);
                 synonym = findViewById(R.id.synonyms);
                 derivation = findViewById(R.id.derivations);
-                if (response.body() != null) {
+                if (response.code() == 200) {
+                    spinner.setVisibility(View.GONE);
                     if (response.body().getBody() != null) {
                         word.setText(response.body().getBody().getWord());
                         TextView pronunciation = (TextView) findViewById(R.id.pronunciation);
@@ -102,9 +112,12 @@ public class DetailActivity extends AppCompatActivity {
 
                     }
                 }
-
-
+                else{
+                    ErrorDialog errorDialog = new ErrorDialog(text);
+                    errorDialog.show(getSupportFragmentManager(), "Example");
+                }
             }
+
 
             @Override
             public void onFailure(Call<DetailModel> call, Throwable t) {
@@ -113,7 +126,30 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         });
-        ToggleButton toggle = (ToggleButton) findViewById(R.id.toogleLove);
+        toggle = (ToggleButton) findViewById(R.id.toogleLove);
+        iHintService.getListWords(sharePreferenceService.getToken()).enqueue(new Callback<BodyFavorite>() {
+            @Override
+            public void onResponse(Call<BodyFavorite> call, Response<BodyFavorite> response) {
+                if(response.code() == 200){
+                    boolean isLove = false;
+                    for(int i =0; i < response.body().getBody().size(); i++){
+                        String loveWord = response.body().getBody().get(i).getWord();
+                        if(loveWord.toLowerCase().equals(text.toLowerCase())){
+                            isLove = true;
+                        }
+                    }
+                    if(isLove){
+                        toggle.setChecked(true);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BodyFavorite> call, Throwable t) {
+
+            }
+        });
+
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 final String word_f = word.getText().toString();

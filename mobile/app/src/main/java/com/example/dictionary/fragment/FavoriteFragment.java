@@ -47,12 +47,11 @@ public class FavoriteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_favorite, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorite, container, false);
         // Inflate the layout for this fragment
         sharePreferenceService = SharePreferenceService.getInstance(getContext());
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
-
         listWordF = view.findViewById(R.id.listWordFavorite);
         //cách mới = Linnear Layout in Adapter but Dong can't research anymore :v
 //        listWordF.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
@@ -73,11 +72,19 @@ public class FavoriteFragment extends Fragment {
 //            }
 //        });
 
+        return view;
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         iHintService.getListWords(sharePreferenceService.getToken()).enqueue(new Callback<BodyFavorite>() {
             @Override
             public void onResponse(Call<BodyFavorite> call, Response<BodyFavorite> response) {
 
-                if(response.code() == 200){
+                if (response.code() == 200) {
                     FavoriteAdapter favoriteAdapter = new FavoriteAdapter(response.body().getBody());
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                     layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -94,7 +101,6 @@ public class FavoriteFragment extends Fragment {
                     });
 
 
-
                 }
             }
 
@@ -104,13 +110,7 @@ public class FavoriteFragment extends Fragment {
 
             }
         });
-        return view;
-
-
-
-
     }
-
 }
 
 
