@@ -54,14 +54,14 @@ public class HomeFragment extends Fragment {
                 iHintService.searchText(textSearch).enqueue(new Callback<TextModel>() {
                     @Override
                     public void onResponse(Call<TextModel> call, Response<TextModel> response) {
-                        if(response.code() == 200){
+                        if (response.code() == 200) {
                             System.out.println("Search de");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<TextModel> call, Throwable t) {
-                            t.printStackTrace();
+                        t.printStackTrace();
                     }
                 });
 
@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment {
 
                                 }
                             });
-                        }else{
+                        } else {
                             ErrorDialog errorDialog = new ErrorDialog(textSearch);
                             errorDialog.show(getFragmentManager(), "Example");
                         }

@@ -7,6 +7,7 @@ import com.example.dictionary.model.BodyCardsetLearnModel;
 import com.example.dictionary.model.BodyCountModel;
 import com.example.dictionary.model.BodyCreateCard;
 import com.example.dictionary.model.BodyLoginModel;
+import com.example.dictionary.model.BodyLogoutModel;
 import com.example.dictionary.model.BodyRegisterModel;
 import com.example.dictionary.model.BodyRememberForgetFlashcardModel;
 import com.example.dictionary.model.Card;
@@ -77,7 +78,8 @@ public interface IHintService {
     @POST("dictionary-flashcard/user/register")
     Call<BodyRegisterModel> registerAcccount(@Body RegisterModel registerModel);
 
-
+    @GET("/dictionary-flashcard/logout")
+    Call<BodyLogoutModel> logout(@Header("Authorization") String token);
 
 
 }
