@@ -2,6 +2,8 @@ package com.example.dictionary.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,48 +45,74 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         btnSearch = view.findViewById(R.id.searchView);
-        searchText = view.findViewById(R.id.txtTextSearch);
+        searchText = (EditText)view.findViewById(R.id.txtTextSearch);
         textList = view.findViewById(R.id.textList);
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
-        searchText.setOnClickListener(new View.OnClickListener() {
+        searchText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 final String textSearch = searchText.getText().toString();
                 iHintService.searchText(textSearch).enqueue(new Callback<TextModel>() {
+
                     @Override
                     public void onResponse(Call<TextModel> call, Response<TextModel> response) {
+<<<<<<< HEAD
                         if (response.code() == 200) {
                             System.out.println("Search de");
+=======
+                        int code = response.code();
+                        if (code == 200) {
+                            final ArrayList<String> texts = response.body().getBody();
+                            TextAdapter textAdapter = new TextAdapter(texts);
+                            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                            textList.setLayoutManager(layoutManager);
+                            textList.setAdapter(textAdapter);
+                            textAdapter.setOnItemClickListener(new TextAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(String text) {
+                                    Intent intent = new Intent(getContext(), DetailActivity.class);
+                                    intent.putExtra(KEY_TEXT_SEARCH, text);
+                                    startActivity(intent);
+
+                                }
+                            });
+>>>>>>> 0cdfe907d4e44499b5dab417d53425b900a0f733
                         }
+
                     }
 
                     @Override
                     public void onFailure(Call<TextModel> call, Throwable t) {
+<<<<<<< HEAD
                         t.printStackTrace();
-                    }
-                });
+=======
+                        System.out.println(t.getMessage());
 
+>>>>>>> 0cdfe907d4e44499b5dab417d53425b900a0f733
+                    }
+
+                });
 
             }
         });
+
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String textSearch = searchText.getText().toString();
-
-
-//                System.out.println(textSearch);
-//                List<String> texts = hintService.searchText(textSearch);
-//
-//                if(texts == null) {
-//                    textresult = "Not Found";
-//                }else {
-//                    for (int i = 0; i < texts.size(); i++){
-//                        textresult = textresult + " " + texts.get(i);
-//                    }
-//                }
                 iHintService.searchText(textSearch).enqueue(new Callback<TextModel>() {
 
                     @Override

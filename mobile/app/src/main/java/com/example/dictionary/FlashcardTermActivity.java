@@ -19,6 +19,7 @@ import com.example.dictionary.service.IHintService;
 import com.example.dictionary.service.RetrofitClient;
 import com.example.dictionary.service.SharePreferenceService;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -44,6 +45,7 @@ public class FlashcardTermActivity extends AppCompatActivity {
 
 
     private void setTextData() {
+        System.out.println("SET DATA"+currentIndex);
         if (currentIndex >= 0 && currentIndex < 6 && currentIndex < cards.size()) {
             txtTerm.setText(cards.get(currentIndex).getTerm());
             txtDefinition.setText(cards.get(currentIndex).getDefinition());
@@ -75,6 +77,7 @@ public class FlashcardTermActivity extends AppCompatActivity {
         iHintService.getAllFlashcardDetail(sharePreferenceService.getToken(), cardSetId).enqueue(new Callback<BodyCardSetDetailModel>() {
             @Override
             public void onResponse(Call<BodyCardSetDetailModel> call, Response<BodyCardSetDetailModel> response) {
+
                 if (response.code() == 200) {
                     cards = response.body().getBody().getCards();
                     card_datas = new ArrayList<>();
@@ -90,7 +93,9 @@ public class FlashcardTermActivity extends AppCompatActivity {
 
                 }
             }
+
             //file huwosng daxn, slide,
+
 
             @Override
             public void onFailure(Call<BodyCardSetDetailModel> call, Throwable t) {
@@ -101,13 +106,21 @@ public class FlashcardTermActivity extends AppCompatActivity {
         btnStudyAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (currentIndex >= 0 && currentIndex <= 6 ) {
+                    System.out.println(sharePreferenceService.getToken());
+                    System.out.println(sessionId);
+                    System.out.println(cards.get(currentIndex).getId());
                     iHintService.forgetFlashcard(sharePreferenceService.getToken(), sessionId, cards.get(currentIndex).getId()).enqueue(new Callback<BodyRememberForgetFlashcardModel>() {
+
                         @Override
                         public void onResponse(Call<BodyRememberForgetFlashcardModel> call, Response<BodyRememberForgetFlashcardModel> response) {
+                            System.out.println(response.code());
                             if (response.code() == 201) {
                                 currentIndex++;
+
                                 setTextData();
+
                             }
                         }
 
@@ -129,8 +142,6 @@ public class FlashcardTermActivity extends AppCompatActivity {
                         public void onResponse(Call<BodyRememberForgetFlashcardModel> call, Response<BodyRememberForgetFlashcardModel> response) {
                             if (response.code() == 201) {
                                 cards.remove(cards.get(currentIndex));
-                                System.out.println(cards.size());
-                                System.out.println(card_datas.size());
                                 setTextData();
                             }
                         }
@@ -176,7 +187,15 @@ public class FlashcardTermActivity extends AppCompatActivity {
                         public void onResponse(Call<BodyCardsetLearnModel> call, Response<BodyCardsetLearnModel> response) {
                             if (response.code() == 201) {
                                 sessionId = response.body().getBody().getCardSetSessionId();
-                                cards = card_datas;
+                                cards = new ArrayList<Card>();
+                                for(int i = 0; i < card_datas.size(); i++ ){
+                                    Card card = new Card();
+                                    card.setId(card_datas.get(i).getId());
+                                    card.setTerm(card_datas.get(i).getTerm());
+                                    card.setDefinition(card_datas.get(i).getDefinition());
+                                    card.setCardSetId(card_datas.get(i).getCardSetId());
+                                    cards.add(card);
+                                }
                                 currentIndex = 0;
                                 setTextData();
                             }

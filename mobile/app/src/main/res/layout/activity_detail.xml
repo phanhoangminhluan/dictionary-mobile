@@ -20,7 +20,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_centerHorizontal="true" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -43,6 +49,15 @@
                         android:text="/pronuciation/"
                         android:textColor="#440000"
                         android:textSize="22dp" />
+                    <ToggleButton
+                        android:id="@+id/toogleLove"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:layout_marginLeft="30dp"
+                        android:textOff="Dislove"
+                        android:textOn="Love" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -56,8 +71,9 @@
                         android:layout_height="wrap_content"
                         android:text="ADJECTIVE "
                         android:textStyle="bold"
+                        android:textAllCaps="true"
                         android:textColor="@android:color/holo_orange_light"
-                        android:textSize="20dp" />
+                        android:textSize="16dp" />
 
                     <TextView
                         android:id="@+id/definition"
@@ -122,9 +138,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="ADJECTIVE"
+                            android:textAllCaps="true"
                             android:padding="5dp"
                             android:textColor="@android:color/holo_orange_light"
-                            android:textSize="20dp"
+                            android:textSize="15dp"
                             android:textStyle="bold" />
                     </LinearLayout>
 

@@ -12,6 +12,7 @@ import com.example.dictionary.model.BodyCardModel;
 import com.example.dictionary.model.Card;
 import com.example.dictionary.service.IHintService;
 import com.example.dictionary.service.RetrofitClient;
+import com.example.dictionary.service.SharePreferenceService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,7 +23,9 @@ public class DeleteDialog extends AppCompatDialogFragment {
     String text, id;
     private IHintService iHintService = null;
     private Retrofit retrofit;
-    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZDIiLCJleHAiOjE1ODQzMjAzMDB9.zyuUNXdeOg9zA5yIUH-d9AXSpx0m7DT7A1Rv1D2IBGVhaqTE8S4RtzW66olrS4ObxXnEA5C7btLLLkYyrW9dqg";
+
+    private SharePreferenceService sharePreferenceService;
+
     private DeleteDialog.OnItemClickListener onItemClickListener;
 
     public DeleteDialog(String text, String id, DeleteDialog.OnItemClickListener onItemClickListener) {
@@ -33,6 +36,8 @@ public class DeleteDialog extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        sharePreferenceService = SharePreferenceService.getInstance(getContext());
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("DELETE").setMessage("Do you want to delete " +
                 "" + text)
@@ -41,7 +46,8 @@ public class DeleteDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         retrofit = RetrofitClient.getClient();
                         iHintService = retrofit.create(IHintService.class);
-                        iHintService.deleteFlashcard(token, id).enqueue(new Callback<BodyCardDetailModel>() {
+                        System.out.println("InhintService");
+                        iHintService.deleteFlashcard(sharePreferenceService.getToken(), id).enqueue(new Callback<BodyCardDetailModel>() {
                             @Override
                             public void onResponse(Call<BodyCardDetailModel> call, Response<BodyCardDetailModel> response) {
                                 int code = response.code();
@@ -56,7 +62,6 @@ public class DeleteDialog extends AppCompatDialogFragment {
                                 t.printStackTrace();
                             }
                         });
-//                        Intent intent = new Intent(getActivity(), )
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
