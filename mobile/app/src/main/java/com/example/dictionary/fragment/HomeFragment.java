@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         btnSearch = view.findViewById(R.id.searchView);
-        searchText = (EditText)view.findViewById(R.id.txtTextSearch);
+        searchText = (EditText) view.findViewById(R.id.txtTextSearch);
         textList = view.findViewById(R.id.textList);
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
@@ -67,10 +67,6 @@ public class HomeFragment extends Fragment {
 
                     @Override
                     public void onResponse(Call<TextModel> call, Response<TextModel> response) {
-<<<<<<< HEAD
-                        if (response.code() == 200) {
-                            System.out.println("Search de");
-=======
                         int code = response.code();
                         if (code == 200) {
                             final ArrayList<String> texts = response.body().getBody();
@@ -88,19 +84,15 @@ public class HomeFragment extends Fragment {
 
                                 }
                             });
->>>>>>> 0cdfe907d4e44499b5dab417d53425b900a0f733
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<TextModel> call, Throwable t) {
-<<<<<<< HEAD
-                        t.printStackTrace();
-=======
+
                         System.out.println(t.getMessage());
 
->>>>>>> 0cdfe907d4e44499b5dab417d53425b900a0f733
                     }
 
                 });
