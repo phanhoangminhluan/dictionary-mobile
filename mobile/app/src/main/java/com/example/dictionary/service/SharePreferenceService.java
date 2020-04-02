@@ -11,19 +11,22 @@ public class SharePreferenceService {
     public SharePreferenceService(Context context) {
         this.pre = context.getSharedPreferences("MyData", Context.MODE_PRIVATE);
     }
-    public static SharePreferenceService getInstance(Context context){
-        if(sharePreferenceService == null){
+
+    public static SharePreferenceService getInstance(Context context) {
+        if (sharePreferenceService == null) {
             sharePreferenceService = new SharePreferenceService(context);
         }
         return sharePreferenceService;
     }
-    public void setToken(String token){
+
+    public void setToken(String token) {
         SharedPreferences.Editor editor = pre.edit();
         editor.putString("token", token);
         editor.commit();
     }
-    public String getToken(){
-       String result =  pre.getString("token","");
+
+    public String getToken() {
+        String result = pre.getString("token", "");
         return result;
     }
 
