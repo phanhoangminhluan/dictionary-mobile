@@ -47,17 +47,17 @@ public interface IHintService {
 
 
 //Todo: @Body: đẩy lên, BodyCreateCard: nhận về
-    @POST("dictionary-flashcard/card-set/custom")
+    @POST("dictionary-flashcard/card-set")
     Call<BodyCreateCard> createCardSet(@Header("Authorization") String token, @Body CreateCardSetModel createCardSetModel);
 
 
-    @GET("dictionary-flashcard/card")
+    @GET("dictionary-flashcard/card") //
     Call<BodyCardModel> getAllCards(@Header("Authorization") String token);
 
-    @PUT("dictionary-flashcard/card")
+    @PUT("dictionary-flashcard/card") //
     Call<BodyCardModel> updateFlashcard(@Header("Authorization") String token, @Body Card cardsDetailModel);
 
-    @DELETE("dictionary-flashcard/card/{id}")
+    @DELETE("dictionary-flashcard/card/{id}") //
     Call<BodyCardDetailModel> deleteFlashcard(@Header("Authorization") String token, @Path("id") String id);
 
     @POST("dictionary-flashcard/flashcard/learn/{cardSetId}")
@@ -80,7 +80,7 @@ public interface IHintService {
     Call<BodyLoginModel> loginSuccess(@Body LoginViewModel loginViewModel);
 
     @POST("dictionary-flashcard/user/register")
-    Call<BodyRegisterModel> registerAcccount(@Body RegisterModel registerModel);
+    Call<BodyRegisterModel> registerAcccount(@Body RegisterModel registerModel); //
 
     @POST("dictionary-flashcard/favorite-word/{word}")
     Call<BodyFavoriteWord> createFavoriteWord(@Header("Authorization") String token, @Path("word") String word);
