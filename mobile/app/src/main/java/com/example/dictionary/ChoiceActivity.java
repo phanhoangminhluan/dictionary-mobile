@@ -22,6 +22,9 @@ public class ChoiceActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() { }
+
     public void onLoginClick(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

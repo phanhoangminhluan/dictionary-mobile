@@ -23,9 +23,12 @@ public class DeleteDialog extends AppCompatDialogFragment {
     String text, id;
     private IHintService iHintService = null;
     private Retrofit retrofit;
+
     private SharePreferenceService sharePreferenceService;
+
     private DeleteDialog.OnItemClickListener onItemClickListener;
-    public DeleteDialog(String text, String id,DeleteDialog.OnItemClickListener onItemClickListener) {
+
+    public DeleteDialog(String text, String id, DeleteDialog.OnItemClickListener onItemClickListener) {
         this.text = text;
         this.id = id;
         this.onItemClickListener = onItemClickListener;
@@ -37,7 +40,7 @@ public class DeleteDialog extends AppCompatDialogFragment {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("DELETE").setMessage("Do you want to delete " +
-                "" +text)
+                "" + text)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -49,10 +52,11 @@ public class DeleteDialog extends AppCompatDialogFragment {
                             public void onResponse(Call<BodyCardDetailModel> call, Response<BodyCardDetailModel> response) {
                                 int code = response.code();
                                 System.out.println(response.code());
-                                if(code == 202){
+                                if (code == 202) {
                                     onItemClickListener.onItemClickDone();
                                 }
                             }
+
                             @Override
                             public void onFailure(Call<BodyCardDetailModel> call, Throwable t) {
                                 t.printStackTrace();
@@ -69,7 +73,7 @@ public class DeleteDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 
-    public  interface OnItemClickListener {
+    public interface OnItemClickListener {
         public void onItemClickDone();
     }
 }

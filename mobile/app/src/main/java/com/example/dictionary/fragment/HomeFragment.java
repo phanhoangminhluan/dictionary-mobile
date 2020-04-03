@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         btnSearch = view.findViewById(R.id.searchView);
-        searchText = (EditText)view.findViewById(R.id.txtTextSearch);
+        searchText = (EditText) view.findViewById(R.id.txtTextSearch);
         textList = view.findViewById(R.id.textList);
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
@@ -90,6 +90,7 @@ public class HomeFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<TextModel> call, Throwable t) {
+
                         System.out.println(t.getMessage());
 
                     }
@@ -125,7 +126,7 @@ public class HomeFragment extends Fragment {
 
                                 }
                             });
-                        }else{
+                        } else {
                             ErrorDialog errorDialog = new ErrorDialog(textSearch);
                             errorDialog.show(getFragmentManager(), "Example");
                         }

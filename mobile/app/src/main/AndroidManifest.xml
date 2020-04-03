@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".GoToSettingActivity"></activity>
+        <activity android:name=".ChangeEmailActivity" />
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".MessageActivity" />
         <activity android:name=".UpdateFlashcardActivity" />
         <activity android:name=".FlashcardTermActivity" />
         <activity android:name=".FlashcardDetailActivity" />

@@ -94,6 +94,9 @@ public class FlashcardTermActivity extends AppCompatActivity {
                 }
             }
 
+            //file huwosng daxn, slide,
+
+
             @Override
             public void onFailure(Call<BodyCardSetDetailModel> call, Throwable t) {
                 t.printStackTrace();
