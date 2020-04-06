@@ -68,8 +68,8 @@ public class DetailActivity extends AppCompatActivity {
                     spinner.setVisibility(View.GONE);
                     if (response.body().getBody() != null) {
                         word.setText(response.body().getBody().getWord());
-                        TextView pronunciation = (TextView) findViewById(R.id.pronunciation);
-                        pronunciation.setText("/" + response.body().getBody().getPronunciation() + "/");
+                        TextView pronunciation = (TextView) findViewById(R.id.ukPhonetic);
+                        pronunciation.setText( response.body().getBody().getUkPhonetic());
                         TextView partOfSpeech = (TextView) findViewById(R.id.partOfSpeech);
                         if (response.body().getBody().getDefinitionDetails() != null && response.body().getBody().getDefinitionDetails().size() > 0) {
                             partOfSpeech.setText(response.body().getBody().getDefinitionDetails().get(0).getPartOfSpeech());

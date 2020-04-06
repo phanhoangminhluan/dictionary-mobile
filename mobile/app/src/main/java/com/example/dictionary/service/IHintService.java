@@ -69,11 +69,11 @@ public interface IHintService {
     @GET("dictionary-flashcard/flashcard/reset-progress/{id}")
     Call<BodyCardsetLearnModel> resetProgress(@Header("Authorization") String token, @Path("id") String id);
 
-    @PUT("dictionary-flashcard/flashcard/forget/{cardSetSessionId}/{cardId}")
-    Call<BodyRememberForgetFlashcardModel> forgetFlashcard(@Header("Authorization") String token, @Path("cardSetSessionId") String cardSetSessionId, @Path("cardId") String cardId);
+    @PUT("dictionary-flashcard/flashcard/forget/{cardId}")
+    Call<BodyRememberForgetFlashcardModel> forgetFlashcard(@Header("Authorization") String token, @Path("cardId") String cardId);
 
-    @PUT("dictionary-flashcard/flashcard/remember/{cardSetSessionId}/{cardId}")
-    Call<BodyRememberForgetFlashcardModel> rememberFlashcard(@Header("Authorization") String token, @Path("cardSetSessionId") String cardSetSessionId, @Path("cardId") String cardId);
+    @PUT("dictionary-flashcard/flashcard/remember/{cardId}")
+    Call<BodyRememberForgetFlashcardModel> rememberFlashcard(@Header("Authorization") String token, @Path("cardId") String cardId);
 
     @GET("dictionary-flashcard/flashcard/count/{id}")
     Call<BodyCountModel> getCountFlashcard(@Header("Authorization") String token, @Path("id") String id);

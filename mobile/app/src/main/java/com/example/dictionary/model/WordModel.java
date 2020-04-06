@@ -6,7 +6,7 @@ public class WordModel {
     String word;
     ArrayList<WordDefinitionDetailModel> definitionDetails;
     ArrayList<String> syllableList;
-    String pronunciation;
+    String ukPhonetic;
     Integer frequency;
 
 
@@ -34,12 +34,13 @@ public class WordModel {
         this.syllableList = syllableList;
     }
 
-    public String getPronunciation() {
-        return pronunciation;
+
+    public String getUkPhonetic() {
+        return ukPhonetic;
     }
 
-    public void setPronunciation(String pronunciation) {
-        this.pronunciation = pronunciation;
+    public void setUkPhonetic(String ukPhonetic) {
+        this.ukPhonetic = ukPhonetic;
     }
 
     public Integer getFrequency() {

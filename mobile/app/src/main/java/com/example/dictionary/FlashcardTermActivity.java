@@ -94,9 +94,6 @@ public class FlashcardTermActivity extends AppCompatActivity {
                 }
             }
 
-            //file huwosng daxn, slide,
-
-
             @Override
             public void onFailure(Call<BodyCardSetDetailModel> call, Throwable t) {
                 t.printStackTrace();
@@ -108,10 +105,7 @@ public class FlashcardTermActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (currentIndex >= 0 && currentIndex <= 6 ) {
-                    System.out.println(sharePreferenceService.getToken());
-                    System.out.println(sessionId);
-                    System.out.println(cards.get(currentIndex).getId());
-                    iHintService.forgetFlashcard(sharePreferenceService.getToken(), sessionId, cards.get(currentIndex).getId()).enqueue(new Callback<BodyRememberForgetFlashcardModel>() {
+                    iHintService.forgetFlashcard(sharePreferenceService.getToken(), cards.get(currentIndex).getId()).enqueue(new Callback<BodyRememberForgetFlashcardModel>() {
 
                         @Override
                         public void onResponse(Call<BodyRememberForgetFlashcardModel> call, Response<BodyRememberForgetFlashcardModel> response) {
@@ -137,13 +131,14 @@ public class FlashcardTermActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (currentIndex >= 0 && currentIndex <= 6) {
-                    iHintService.rememberFlashcard(sharePreferenceService.getToken(), sessionId, cards.get(currentIndex).getId()).enqueue(new Callback<BodyRememberForgetFlashcardModel>() {
+                    iHintService.rememberFlashcard(sharePreferenceService.getToken(), cards.get(currentIndex).getId()).enqueue(new Callback<BodyRememberForgetFlashcardModel>() {
                         @Override
                         public void onResponse(Call<BodyRememberForgetFlashcardModel> call, Response<BodyRememberForgetFlashcardModel> response) {
                             if (response.code() == 201) {
                                 cards.remove(cards.get(currentIndex));
                                 setTextData();
                             }
+                            System.out.println("Hi response"+response.code());
                         }
 
                         @Override

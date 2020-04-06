@@ -42,7 +42,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/pronunciation"
+                        android:id="@+id/ukPhonetic"
                         android:layout_marginLeft="30dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -174,12 +174,6 @@
                         android:textColor="@android:color/darker_gray"
                         android:textSize="20dp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="mid 16th century: from French, or from Latin vagus 'wandering, uncertain'.: "
-                        android:textSize="20dp" />
                 </LinearLayout>
             </LinearLayout>
 
