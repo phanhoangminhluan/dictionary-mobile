@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         editPassword = findViewById(R.id.txtPaswordLogin);
         retrofit = RetrofitClient.getClient();
         iHintService = retrofit.create(IHintService.class);
-        edtUsername.setText("ad");
+        edtUsername.setText("ad5");
         editPassword.setText("123");
 
     }
